@@ -30,9 +30,14 @@ RSpec.describe Shift do
 
   it 'can find the cipher text by shift' do
     shift = Shift.new('hello world', '02715', '040895')
-    expect(shift.ecrypt_shift_a).to eq(['k', 'r', 'u'])
-    expect(shift.ecrypt_shift_b).to eq(['e', ' ', 'l'])
-    expect(shift.ecrypt_shift_c).to eq(['d', 'o', 'w'])
-    expect(shift.ecrypt_shift_d).to eq(['e', 'h']) #keder ohulw
+    expect(shift.encrypt_shift_a).to eq(['k', 'r', 'u'])
+    expect(shift.encrypt_shift_b).to eq(['e', ' ', 'l'])
+    expect(shift.encrypt_shift_c).to eq(['d', 'o', 'w'])
+    expect(shift.encrypt_shift_d).to eq(['e', 'h'])
+  end
+
+  it 'can return crypted message' do
+    shift = Shift.new('hello world', '02715', '040895')
+    expect(shift.encrypted_message).to eq('keder ohulw')
   end
 end

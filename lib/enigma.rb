@@ -1,3 +1,5 @@
+require './lib/shift'
+
 class Enigma
   def encrypt(message, key = random_key, date = date_today)
     {encryption: encrypt_message(message, key, date), key: key, date: date}
@@ -16,7 +18,8 @@ class Enigma
   end
 
   def encrypt_message(message, key, date)
-    'keder ohulw'
+    shift = Shift.new(message, key, date)
+    shift.encrypted_message
   end
 
   def decrypt_message(message, key, date)

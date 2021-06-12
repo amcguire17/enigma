@@ -24,7 +24,7 @@ RSpec.describe Enigma do
   it 'can encrypt a message with just a key' do
     enigma = Enigma.new
     encrypted = enigma.encrypt('hello world', '02715')
-    expected = {encryption: 'keder ohulw', key: '02715', date: '120621'}
+    expected = {encryption: 'okfavfqdyry', key: '02715', date: '120621'}
     expect(encrypted).to eq(expected)
   end
 
@@ -38,8 +38,8 @@ RSpec.describe Enigma do
 
   it 'can encrypt a message with a random key and todays date' do
     enigma = Enigma.new
-    expected = {encryption: 'keder ohulw', key: '46817', date: '120621'}
-    allow(enigma).to receive(:encrypt).and_return(encryption: 'keder ohulw', key: '46817', date: '120621')
+    expected = {encryption: 'eypclt foeh', key: '46817', date: '120621'}
+    allow(enigma).to receive(:encrypt).and_return(encryption: 'eypclt foeh', key: '46817', date: '120621')
     expect(enigma.encrypt('hello world')).to eq(expected)
   end
 
