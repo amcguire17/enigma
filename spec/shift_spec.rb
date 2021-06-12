@@ -11,33 +11,33 @@ RSpec.describe Shift do
   it 'can create offset from date' do
     shift = Shift.new('hello world', '02715', '040895')
 
-    expect(enigma.shift_offset('040895')).to eq([1, 0, 2, 5])
+    expect(shift.shift_offset).to eq([1, 0, 2, 5])
   end
 
   it 'can create 4 shift keys' do
     shift = Shift.new('hello world', '02715', '040895')
 
-    expect(enigma.shift_key('02715')).to eq([0, 2, 7, 1, 5])
+    expect(shift.shift_key).to eq([0, 2, 7, 1, 5])
   end
 
   it 'can return shift a' do
     shift = Shift.new('hello world', '02715', '040895')
-    expect(shift.shift_a).to eq(['k', 'r', 'u'])
+    expect(shift.shift_a_letters).to eq(['h', 'o', 'r'])
 
   end
 
   it 'can return shift b' do
     shift = Shift.new('hello world', '02715', '040895')
-    expect(shift.shift_b).to eq(['e', ' ', 'l'])
+    expect(shift.shift_b_letters).to eq(['e', ' ', 'l'])
   end
 
   it 'can return shift c' do
     shift = Shift.new('hello world', '02715', '040895')
-    expect(shift.shift_c).to eq(['d', 'o', 'w'])
+    expect(shift.shift_c_letters).to eq(['l', 'w', 'd'])
   end
 
   it 'can return shift d' do
     shift = Shift.new('hello world', '02715', '040895')
-    expect(shift.shift_d).to eq(['e', 'h'])
+    expect(shift.shift_d_letters).to eq(['l', 'o'])
   end
 end

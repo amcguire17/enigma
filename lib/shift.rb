@@ -1,8 +1,8 @@
 class Shift
   def initialize(message, key, date)
-    @message = decrypt_message
+    @message = message
     @key = key
-    @dte = date
+    @date = date
   end
   def alphabet
     ('a'..'z').to_a << ' '
@@ -21,15 +21,47 @@ class Shift
     end
   end
 
-  def shift_a
+  def shift_a_letters
+    a = []
+    mess_array = @message.split('').to_enum
+    mess_array.with_index do |letter, index|
+      if index % 4 == 0
+        a << letter
+      end
+    end
+    a
   end
 
-  def shift_b
+  def shift_b_letters
+    b = []
+    mess_array = @message.split('').to_enum
+    mess_array.with_index do |letter, index|
+      if index % 4 == 1
+        b << letter
+      end
+    end
+    b
   end
 
-  def shift_c
+  def shift_c_letters
+    c = []
+    mess_array = @message.split('').to_enum
+    mess_array.with_index do |letter, index|
+      if index % 4 == 2
+        c << letter
+      end
+    end
+    c
   end
 
-  def shift_d
+  def shift_d_letters
+    d = []
+    mess_array = @message.split('').to_enum
+    mess_array.with_index do |letter, index|
+      if index % 4 == 3
+        d << letter
+      end
+    end
+    d
   end
 end
