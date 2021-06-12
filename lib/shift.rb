@@ -8,7 +8,11 @@ class Shift
   def alphabet
     ('a'..'z').to_a << ' '
   end
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> 34abc75a6098c7ee2546bdfc3bbae0a802c8029e
   def shift_offset
     exp = @date.to_i ** 2
     last = exp.to_s.split('').last(4)
