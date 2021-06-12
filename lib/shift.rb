@@ -64,4 +64,36 @@ class Shift
     end
     d
   end
+
+  def ecrypt_shift_a
+    shift_amount = shift_key[0..1].join.to_i + shift_offset[0]
+    shift_a_letters.map do |letter|
+      index = alphabet.find_index(letter)
+      alphabet.rotate(shift_amount)[index]
+    end
+  end
+
+  def ecrypt_shift_b
+    shift_amount = shift_key[1..2].join.to_i + shift_offset[1]
+    shift_b_letters.map do |letter|
+      index = alphabet.find_index(letter)
+      alphabet.rotate(shift_amount)[index]
+    end
+  end
+
+  def ecrypt_shift_c
+    shift_amount = shift_key[2..3].join.to_i + shift_offset[2]
+    shift_c_letters.map do |letter|
+      index = alphabet.find_index(letter)
+      alphabet.rotate(shift_amount)[index]
+    end
+  end
+
+  def ecrypt_shift_d
+    shift_amount = shift_key[3..4].join.to_i + shift_offset[3]
+    shift_d_letters.map do |letter|
+      index = alphabet.find_index(letter)
+      alphabet.rotate(shift_amount)[index]
+    end
+  end
 end
