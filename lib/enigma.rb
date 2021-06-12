@@ -1,18 +1,12 @@
+require 'pry'
+
 class Enigma
   def encrypt(message, key = random_key, date = date_today)
-    encrypt = {
-                encryption: encrypt_message(message),
-                key: key,
-                date: date
-              }
+    {encryption: encrypt_message(message, key, date), key: key, date: date}
   end
 
   def decrypt(message, key = random_key, date = date_today)
-    decrypt = {
-                decryption: decrypt_message(message),
-                key: key,
-                date: date
-              }
+    {decryption: decrypt_message(message, key, date), key: key, date: date}
   end
 
   def random_key
@@ -23,11 +17,11 @@ class Enigma
     Date.today.strftime("%d%m%y")
   end
 
-  def encrypt_message(message)
+  def encrypt_message(message, key, date)
     'keder ohulw'
   end
 
-  def decrypt_message(message)
+  def decrypt_message(message, key, date)
     'hello world'
   end
 end

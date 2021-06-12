@@ -1,4 +1,3 @@
-require 'pry'
 require 'date'
 require './lib/enigma'
 
@@ -43,4 +42,12 @@ RSpec.describe Enigma do
     allow(enigma).to receive(:encrypt).and_return(encryption: "keder ohulw", key: "46817", date: "110621")
     expect(enigma.encrypt("hello world")).to eq(expected)
   end
+
+  it 'can generate a random key' do
+    enigma = Enigma.new
+    expect(enigma.random_key.length).to eq(5)
+  end
+
+  it 'can encrypt message'
+  it 'can decrpyt message'
 end
