@@ -42,15 +42,15 @@ RSpec.describe Shift do
   end
 
   it 'can find the decipher text by shift' do
-    shift = Shift.new('keder ohulw', '02715', '040895')
+    shift = Shift.new('keder ohulw!', '02715', '040895')
     expect(shift.decrypt_shift_a).to eq(['h', 'o', 'r'])
     expect(shift.decrypt_shift_b).to eq(['e', ' ', 'l'])
     expect(shift.decrypt_shift_c).to eq(['l', 'w', 'd'])
-    expect(shift.decrypt_shift_d).to eq(['l', 'o'])
+    expect(shift.decrypt_shift_d).to eq(['l', 'o', '!'])
   end
 
   it 'can return decrypted message' do
-    shift = Shift.new('keder ohulw', '02715', '040895')
-    expect(shift.decrypted_message).to eq('hello world')
+    shift = Shift.new('keder ohulw!', '02715', '040895')
+    expect(shift.decrypted_message).to eq('hello world!')
   end
 end
