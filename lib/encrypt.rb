@@ -3,13 +3,13 @@
 
 enigma = Enigma.new
 
-original_file = File.open(ARGV[0], "r")
+original_file = File.open(ARGV[0], 'r')
 message = original_file.read
 original_file.close
 
 encrypted_message = enigma.encrypt(message)
 
-new_file = File.open(ARGV[1], "w")
+new_file = File.open(ARGV[1], 'w')
 new_file.write(encrypted_message[:encryption])
 new_file.close
 
