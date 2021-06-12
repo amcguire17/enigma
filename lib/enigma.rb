@@ -1,5 +1,3 @@
-require 'pry'
-
 class Enigma
   def encrypt(message, key = random_key, date = date_today)
     {encryption: encrypt_message(message, key, date), key: key, date: date}
@@ -14,7 +12,7 @@ class Enigma
   end
 
   def date_today
-    Date.today.strftime("%d%m%y")
+    Date.today.strftime('%d%m%y')
   end
 
   def encrypt_message(message, key, date)
