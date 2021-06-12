@@ -3,7 +3,7 @@
 
 enigma = Enigma.new
 
-original_file = File.open(ARGV[0], 'r')
+# original_file = File.open(ARGV[0], 'r')
 message = original_file.read
 original_file.close
 
