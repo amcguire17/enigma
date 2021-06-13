@@ -1,6 +1,6 @@
 require './lib/key'
 require './lib/message'
-require './lib/cryptograble'
+require './lib/modules/cryptograble'
 
 class Shift
   include Cryptograble
