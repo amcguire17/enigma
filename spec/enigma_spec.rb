@@ -40,18 +40,6 @@ RSpec.describe Enigma do
     expect(@enigma.encrypt('hello world')).to eq(expected)
   end
 
-  it 'can generate a random key' do
-    expect(@enigma.random_key.length).to eq(5)
-  end
-
-  it 'can encrypt message' do
-    expect(@enigma.encrypt_message('hello world', '02715', '040895')).to eq('keder ohulw')
-  end
-
-  it 'can decrpyt message' do
-    expect(@enigma.decrypt_message('keder ohulw', '02715', '040895')).to eq('hello world')
-  end
-
   describe 'Cracking the Code' do
     before(:each) do
       @enigma = Enigma.new
