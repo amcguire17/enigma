@@ -5,9 +5,11 @@ require './lib/modules/cryptograble'
 class Shift
   include Cryptograble
 
+  attr_reader :shift_message, :shift_keys
+
   def initialize(message, key, date)
-    @shift_message = Message.new(message)
-    @shift_keys = Key.new(key, date)
+    @shift_message = Message.new(message, self)
+    @shift_keys = Key.new(key, date, self)
   end
 
   def alphabet
@@ -52,5 +54,16 @@ class Shift
 
   def decrypted_message
     join_shifted_letters(decrypt_shift_a, decrypt_shift_b, decrypt_shift_c, decrypt_shift_d)
+  end
+
+  def crack_end_message_shift
+    shift_message.combined_end_message.map do |index, letter|
+      alphabet.rotate(index).find_index(letter)
+    end
+  end
+
+  def cracked_message
+    shift_keys.crack_key
+    decrypted_message
   end
 end

@@ -44,4 +44,11 @@ RSpec.describe Shift do
       expect(@shift.decrypted_message).to eq('hello world!!!!')
     end
   end
+
+  describe 'Decrypting Cracked Message' do
+    it 'can return cracked decrypted message' do
+      shift = Shift.new('vjqtbeaweqihssi', 0, '291018')
+      expect(shift.cracked_message).to eq('hello world end')
+    end
+  end
 end
