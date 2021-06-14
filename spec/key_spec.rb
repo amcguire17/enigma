@@ -16,7 +16,7 @@ RSpec.describe Key do
 
   it 'can return todays date' do
     key = Key.new(0, 0, @shift)
-    expect(@key.date_today).to eq('140621')
+    expect(@key.date_today).to eq('150621')
   end
 
   it 'can return string as array' do

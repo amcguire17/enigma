@@ -1,7 +1,9 @@
 require './lib/modules/Indexable'
+require './lib/modules/crackable'
 
 class Key
   include Indexable
+  include Crackable
 
   attr_reader :key, :offset
 
@@ -56,19 +58,19 @@ class Key
   end
 
   def crack_shift_a_key
-    (crack_rotate_for_shift[0] - split_offset[0]).to_s.rjust(2, '0').split('')
+    sub_shift_from_offset(0)
   end
 
   def crack_shift_b_key
-    (crack_rotate_for_shift[1] - split_offset[1]).to_s.rjust(2, '0').split('')
+    sub_shift_from_offset(1)
   end
 
   def crack_shift_c_key
-    (crack_rotate_for_shift[2] - split_offset[2]).to_s.rjust(2, '0').split('')
+    sub_shift_from_offset(2)
   end
 
   def crack_shift_d_key
-    (crack_rotate_for_shift[3] - split_offset[3]).to_s.rjust(2, '0').split('')
+    sub_shift_from_offset(3)
   end
 
   def crack_a_key
@@ -76,21 +78,11 @@ class Key
   end
 
   def crack_b_key
-    key = (27 - ((crack_shift_a_key[1].to_i * 10) % 27)) + crack_shift_b_key.join.to_i
-    if key > 9
-      (10 - key).to_s
-    else
-      key.to_s
-    end
+    calc_keys_to_combine(crack_shift_a_key, crack_shift_b_key)
   end
 
   def crack_c_key
-    key = (27 - ((crack_shift_b_key[1].to_i * 10) % 27)) + crack_shift_c_key.join.to_i
-    if key > 9
-      (10 - key).to_s
-    else
-      key.to_s
-    end
+    calc_keys_to_combine(crack_shift_b_key, crack_shift_c_key)
   end
 
   def crack_d_key

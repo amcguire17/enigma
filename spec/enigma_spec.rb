@@ -24,19 +24,19 @@ RSpec.describe Enigma do
 
   it 'can encrypt a message with just a key' do
     encrypted = @enigma.encrypt('hello world', '02715')
-    expected = {encryption: 'okfavfqdyry', key: '02715', date: '140621'}
+    expected = {encryption: 'okfavfqdyry', key: '02715', date: '150621'}
     expect(encrypted).to eq(expected)
   end
 
   it 'can decrypt a message with just a key' do
     decrypted = @enigma.decrypt('okfavfqdyry', '02715')
-    expected = {decryption: 'hello world', key: '02715', date: '140621'}
+    expected = {decryption: 'hello world', key: '02715', date: '150621'}
     expect(decrypted).to eq(expected)
   end
 
   it 'can encrypt a message with a random key and todays date' do
-    expected = {encryption: 'eypclt foeh', key: '46817', date: '140621'}
-    allow(@enigma).to receive(:encrypt).and_return(encryption: 'eypclt foeh', key: '46817', date: '140621')
+    expected = {encryption: 'eypclt foeh', key: '46817', date: '150621'}
+    allow(@enigma).to receive(:encrypt).and_return(encryption: 'eypclt foeh', key: '46817', date: '150621')
     expect(@enigma.encrypt('hello world')).to eq(expected)
   end
 
@@ -55,7 +55,7 @@ RSpec.describe Enigma do
     it 'can crack code without key and date' do
       @enigma.encrypt('hello world end', '08304', '291018')
       cracked = @enigma.crack('vjqtbeaweqihssi')
-      expected = {decryption: 'hello world end', key: '', date: '140621'}
+      expected = {decryption: 'hello world end', key: '', date: '150621'}
     end
   end
 end
