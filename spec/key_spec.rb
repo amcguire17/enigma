@@ -49,17 +49,21 @@ RSpec.describe Key do
     end
 
     it 'can find key in correct shift position' do
-      expect(@key.crack_shift_a_key).to eq(['0', '8'])
-      expect(@key.crack_shift_b_key).to eq(['0', '2'])
-      expect(@key.crack_shift_c_key).to eq(['0', '3'])
-      expect(@key.crack_shift_d_key).to eq(['0', '4'])
+      expect(@key.crack_shift_a_sub_offset).to eq(8)
+      expect(@key.crack_shift_b_sub_offset).to eq(2)
+      expect(@key.crack_shift_c_sub_offset).to eq(3)
+      expect(@key.crack_shift_d_sub_offset).to eq(4)
     end
 
-    it 'can find key by shift to combine final cracked key' do
-      expect(@key.crack_a_key).to eq('08')
-      expect(@key.crack_b_key).to eq('3')
-      expect(@key.crack_c_key).to eq('0')
-      expect(@key.crack_d_key).to eq('4')
+    it 'can return list of correct shift key options' do
+      expect(@key.crack_shift_a_key_options).to eq([['0', '8'], ['3', '5'], ['6', '2'], ['8', '9']])
+      expect(@key.crack_shift_b_key_options).to eq([['0', '2'], ['2', '9'], ['5', '6'], ['8', '3']])
+      expect(@key.crack_shift_c_key_options).to eq([['0', '3'], ['3', '0'], ['5', '7'], ['8', '4']])
+      expect(@key.crack_shift_d_key_options).to eq([['0', '4'], ['3', '1'], ['5', '8'], ['8', '5']])
+    end
+
+    it 'can compare shift key option lists' do
+      expect(@key.compare_shifts).to eq({c: ['3', '0']})
     end
 
     it 'can return cracked key' do

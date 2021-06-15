@@ -1,4 +1,4 @@
-require './lib/modules/Indexable'
+require './lib/modules/indexable'
 
 class Message
   include Indexable

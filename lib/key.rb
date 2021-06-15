@@ -1,9 +1,9 @@
-require './lib/modules/Indexable'
-require './lib/modules/crackable'
+require './lib/modules/indexable'
+require './lib/modules/calculatable'
 
 class Key
   include Indexable
-  include Crackable
+  include Calculatable
 
   attr_reader :key, :offset
 
@@ -57,39 +57,85 @@ class Key
     @shift.crack_end_message_shift.rotate(4 - @shift.shift_message.message.length % 4)
   end
 
-  def crack_shift_a_key
+  def crack_shift_a_sub_offset
     sub_shift_from_offset(0)
   end
 
-  def crack_shift_b_key
+  def crack_shift_b_sub_offset
     sub_shift_from_offset(1)
   end
 
-  def crack_shift_c_key
+  def crack_shift_c_sub_offset
     sub_shift_from_offset(2)
   end
 
-  def crack_shift_d_key
+  def crack_shift_d_sub_offset
     sub_shift_from_offset(3)
   end
 
-  def crack_a_key
-    crack_shift_a_key.join
+  def crack_shift_a_key_options
+    crack_key_options(crack_shift_a_sub_offset)
   end
 
-  def crack_b_key
-    calc_keys_to_combine(crack_shift_a_key, crack_shift_b_key)
+  def crack_shift_b_key_options
+    crack_key_options(crack_shift_b_sub_offset)
   end
 
-  def crack_c_key
-    calc_keys_to_combine(crack_shift_b_key, crack_shift_c_key)
+  def crack_shift_c_key_options
+    crack_key_options(crack_shift_c_sub_offset)
   end
 
-  def crack_d_key
-    crack_shift_d_key[1]
+  def crack_shift_d_key_options
+    crack_key_options(crack_shift_d_sub_offset)
+  end
+
+  def compare_shifts
+     if find_common(crack_shift_a_key_options, crack_shift_b_key_options).length == 1
+       {b: find_common(crack_shift_a_key_options, crack_shift_b_key_options).flatten}
+     elsif find_common(crack_shift_b_key_options, crack_shift_c_key_options).length == 1
+       {c: find_common(crack_shift_b_key_options, crack_shift_c_key_options).flatten}
+     elsif find_common(crack_shift_c_key_options, crack_shift_d_key_options).length == 1
+       {d: find_common(crack_shift_c_key_options, crack_shift_d_key_options).flatten}
+     end
   end
 
   def crack_key
-    @key = crack_a_key + crack_b_key + crack_c_key + crack_d_key
+    if compare_shifts[:b] != nil
+      a = crack_shift_a_key_options.select do |num1, num2|
+        num2 == compare_shifts[:b][0]
+      end.flatten
+      b = compare_shifts[:b]
+      c = crack_shift_c_key_options.select do |num1, num2|
+        num1 == compare_shifts[:b][1]
+      end.flatten
+      d = crack_shift_d_key_options.select do |num1, num2|
+        num1 == c[1]
+      end.flatten
+      @key = a.join + b[1] + c[1] + d[1]
+    elsif compare_shifts[:c] != nil
+      b = crack_shift_b_key_options.select do |num1, num2|
+        num2 == compare_shifts[:c][0]
+      end.flatten
+      c = compare_shifts[:c]
+      d = crack_shift_d_key_options.select do |num1, num2|
+        num1 == compare_shifts[:c][1]
+      end.flatten
+      a = crack_shift_a_key_options.select do |num1, num2|
+        num2 == b[0]
+      end.flatten
+      @key = a.join + b[1] + c[1] + d[1]
+    elsif compare_shifts[:d] != nil
+      c = crack_shift_c_key_options.select do |num1, num2|
+        num2 == compare_shifts[:d][0]
+      end.flatten
+      d = compare_shifts[:d]
+      b = crack_shift_b_key_options.select do |num1, num2|
+        num2 == c[0]
+      end.flatten
+      a = crack_shift_a_key_options.select do |num1, num2|
+        num2 == b[0]
+      end.flatten
+      @key = a.join + b[1] + c[1] + d[1]
+    end
   end
 end
